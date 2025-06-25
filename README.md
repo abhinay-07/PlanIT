@@ -35,3 +35,6 @@ PlanIt is a responsive, community-driven web platform tailored for students, loc
 1. Clone the repo:
    ```bash
    git clone https://github.com/abhinay-07/planit.git
+
+2. Set up your development environment.
+
