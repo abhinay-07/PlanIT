@@ -37,4 +37,7 @@ PlanIt is a responsive, community-driven web platform tailored for students, loc
    git clone https://github.com/abhinay-07/planit.git
 
 2. Set up your development environment.
+3. Configure your .env file with database and API keys.
+4. Run the project in your preferred server environment.
+
 
