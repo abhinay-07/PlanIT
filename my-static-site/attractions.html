@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attractions - PlanIt Your Local Guide</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <img src="images/logo.png" alt="App Logo" class="logo">
+        <h1>PlanIt Your Local Guide</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="attractions.html">Attractions</a></li>
+                <li><a href="businesses.html">Businesses</a></li>
+                <li><a href="services.html">Services</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <section id="attractions-list">
+            <h2>Attractions for <span id="place-name"></span></h2>
+            <div id="attractions-content">
+                <!-- Attraction details will be dynamically inserted here -->
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 PlanIt Your Local Guide</p>
+    </footer>
+    <script src="details.js"></script>
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const placeName = urlParams.get('name');
+            document.getElementById('place-name').textContent = placeName;
+
+            // Example data for attractions
+            const data = {
+                attractions: [
+                    { name: 'Durgamma Temple', description: 'The Kanaka Durga Temple in Vijayawada, located on Indrakeeladri Hill by the Krishna River, is dedicated to Goddess Durga and known for its Dravidian architecture. The temple is open daily from 4:00 AM to 9:45 PM, with free general entry and VIP Darshan available for ₹200 per person. It is especially crowded during the Dussehra festival, offering visitors a spiritual experience with panoramic views of the city', image: 'images/temple.jpg', link: 'https://shorturl.at/wAvoB' },
+                    { name: 'Bhavani Island', description: 'Bhavani Island in Vijayawada, located on the Krishna River, is a popular spot for relaxation and outdoor activities. Accessible via a short ferry ride from Punnami Ghat, which is about 7.5 km from the bus stand, it offers activities like water sports, birdwatching, and nature walks. Entry tickets for the island and various activities range between ₹50-300, depending on what you choose to explore. Visitors are encouraged to come during the monsoon or winter seasons to avoid the heat. Resorts on the island, like the Haritha Resort, provide unique experiences such as treehouse stays, starting at around ₹2000 per night', image: 'images/bhavani.jpeg', link: 'https://shorturl.at/p9d2a' },
+                    { name: 'Prakasham Barrage', description: 'Prakasam Barrage, built across the Krishna River, connects Krishna and Guntur districts and offers scenic views, especially when illuminated at night. Open 24/7 with no entry fee, it’s a popular spot for walks and photography. Located 3 km from Vijayawada city center, it’s easily accessible by autos, taxis, and buses.', image: 'images/barrage.jpg', link: 'https://shorturl.at/pnjbm' },
+                    { name: 'Undavalli Caves', description: 'Undavalli Caves, from the 4th-5th century, feature Buddhist, Jain, and Hindu architecture, with a reclining Vishnu statue as the highlight. Open daily from 9:00 AM to 5:30 PM, tickets cost ₹20 for Indians, ₹250 for foreigners, and ₹25 for cameras. Located 6 km from Vijayawada, the site is accessible by autos, taxis, and buses', image: 'images/undavallicaves.jpg', link: 'https://shorturl.at/xK1ek' },
+                    { name: 'Rajiv Gandhi Park', description: 'Rajiv Gandhi Park is a beautifully landscaped park near Vijayawada railway station, featuring a toy train, musical fountains, and a mini zoo. Open daily from 2:00 PM to 8:30 PM, entry tickets cost ₹10 per person. Located just 2 km from the city center, it is easily reachable by autos, taxis, and buses.', image: 'images/rajivgandhi.jpg', link: 'https://shorturl.at/W68tD' },
+                    { name: 'Dr.B.R.Ambedkar Statue', description: 'The Dr. B.R. Ambedkar Statue in Vijayawada stands 125 feet tall, symbolizing equality and social justice. Situated near the Krishna River, it’s open to visitors 24/7 with no entry fee. Located 5 km from the city center, it is easily accessible by autos, taxis, and buses.', image: 'images/ambethkar.jpg', link: 'https://tinyurl.com/57ybkpuf' },
+                    { name: 'Gandhi Hill', description: 'Gandhi Hill, located in Vijayawada, features a stupa and a memorial honoring Mahatma Gandhi, offering panoramic views of the city. Open daily from 4:00 PM to 8:30 PM, the entry fee is ₹10 per person. Situated 4 km from the city center, it is easily reachable by autos, taxis, and buses.', image: 'images/gandhihill.jpg', link: 'https://tinyurl.com/mt8bz24p' },
+                    { name: 'Bapu museum', description: 'The Bapu Museum, showcases ancient sculptures, artifacts, and inscriptions from the Satavahana and Ikshvaku periods. Open from 10:30 AM to 5:00 PM (closed on Fridays), entry tickets cost ₹10 for Indians and ₹50 for foreigners. Located 3 km from Vijayawada city center, it is easily accessible by autos, taxis, and buses.', image: 'images/attraction4.jpg', link: 'https://tinyurl.com/yxkabsw2' },
+                    { name: 'Kondapalli Fort', description: 'Kondapalli Fort, built in the 14th century by the Reddy dynasty, offers a glimpse into ancient military architecture and houses the village famous for Kondapalli toys. Open daily from 10:00 AM to 5:00 PM, entry tickets cost ₹20 per person. Located 16 km from Vijayawada, it is accessible by autos, taxis, and buses.', image: 'images/kondapallifort.jpg', link: 'https://tinyurl.com/6vdmdty8' },
+                    { name: 'Attraction 4', description: 'Description of Attraction 4', image: 'images/attraction4.jpg', link: 'https://example.com/attraction4' },
+                    { name: 'Attraction 3', description: 'Description of Attraction 3', image: 'images/attraction3.jpg', link: 'https://example.com/attraction3' },
+                    { name: 'Attraction 4', description: 'Description of Attraction 4', image: 'images/attraction4.jpg', link: 'https://example.com/attraction4' },
+                    
+                ]
+            };
+
+            const attractionsContent = document.getElementById('attractions-content');
+
+            data.attractions.forEach(attraction => {
+                const attractionElement = document.createElement('div');
+                attractionElement.className = 'attraction';
+                attractionElement.innerHTML = `
+                    <img src="${attraction.image}" alt="${attraction.name}">
+                    <h3>${attraction.name}</h3>
+                    <p>${attraction.description}</p>
+                    <a href="${attraction.link}" target="_blank">Learn more</a>
+                `;
+                attractionsContent.appendChild(attractionElement);
+            });
+        });
+    </script>
+</body>
+</html>

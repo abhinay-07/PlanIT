@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reviews - PlanIt Your Local Guide</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f4f4f4;
+            color: #333;
+        }
+        
+        header {
+            background-color: #333;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        header .logo {
+            height: 50px;
+            margin-right: 20px;
+        }
+        
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            gap: 15px;
+        }
+        
+        nav ul li {
+            display: inline;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        main {
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        #reviews-list {
+            background: linear-gradient(to right, #ff7e5f, #feb47b);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            color: white;
+        }
+        
+        #reviews-list h2 {
+            margin-top: 0;
+        }
+        
+        #reviews-list ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        
+        #reviews-list li {
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: rgba(255, 255, 255, 0.8);
+            color: #333;
+        }
+        
+        #reviews-list li h3 {
+            margin: 0 0 10px;
+        }
+        
+        #reviews-list li p {
+            margin: 5px 0;
+        }
+        
+        #write-review {
+            background: linear-gradient(to right, #ff7e5f, #feb47b);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            color: white;
+            margin-top: 20px;
+        }
+        
+        #write-review h2 {
+            margin-top: 0;
+        }
+        
+        #write-review form {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        #write-review form label {
+            margin-bottom: 5px;
+        }
+        
+        #write-review form input,
+        #write-review form textarea {
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        
+        #write-review form button {
+            padding: 10px;
+            background: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        
+        #write-review form button:hover {
+            background: #0056b3;
+        }
+        
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="images/logo.jpg" alt="App Logo" class="logo">
+        <h1>PlanIt Your Local Guide</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="attractions.html">Attractions</a></li>
+                <li><a href="businesses.html">Businesses</a></li>
+                <li><a href="reviews.html">Reviews</a></li>
+                <li><a href="services.html">Services</a></li>
+
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <section id="reviews-list">
+            <h2>Reviews for <span id="place-name"></span></h2>
+            <ul id="reviews">
+                <!-- Reviews will be dynamically inserted here -->
+            </ul>
+        </section>
+        
+        <section id="write-review">
+            <h2>Write a Review</h2>
+            <form id="review-form">
+                <label for="author">Name:</label>
+                <input type="text" id="author" name="author" required>
+                
+                <label for="rating">Rating:</label>
+                <input type="number" id="rating" name="rating" min="1" max="5" required>
+                
+                <label for="text">Review:</label>
+                <textarea id="text" name="text" rows="4" required></textarea>
+                
+                <button type="submit">Submit Review</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 PlanIt Your Local Guide</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const placeName = urlParams.get('place_name');
+            document.getElementById('place-name').textContent = placeName;
+
+            // Example reviews data
+            const reviews = [
+                { author: 'John Doe', rating: 5, text: 'Great place!' },
+                { author: 'Jane Smith', rating: 4, text: 'Good service.' },
+                { author: 'Alice Johnson', rating: 3, text: 'Average experience.' },
+                { author: 'Bob Brown', rating: 4, text: 'Nice ambiance.' },
+                { author: 'Charlie Davis', rating: 5, text: 'Excellent food!' }
+            ];
+
+            const reviewsList = document.getElementById('reviews');
+            reviews.forEach(review => {
+                const reviewItem = document.createElement('li');
+                reviewItem.innerHTML = `
+                    <h3>${review.author}</h3>
+                    <p>Rating: ${review.rating}</p>
+                    <p>${review.text}</p>
+                `;
+                reviewsList.appendChild(reviewItem);
+            });
+
+            const reviewForm = document.getElementById('review-form');
+            reviewForm.addEventListener('submit', (event) => {
+                event.preventDefault();
+                const author = document.getElementById('author').value;
+                const rating = document.getElementById('rating').value;
+                const text = document.getElementById('text').value;
+
+                const newReview = { author, rating, text };
+                reviews.push(newReview);
+
+                const reviewItem = document.createElement('li');
+                reviewItem.innerHTML = `
+                    <h3>${newReview.author}</h3>
+                    <p>Rating: ${newReview.rating}</p>
+                    <p>${newReview.text}</p>
+                `;
+                reviewsList.appendChild(reviewItem);
+
+                reviewForm.reset();
+            });
+        });
+    </script>
+</body>
+</html>

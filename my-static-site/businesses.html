@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Businesses - PlanIt Your Local Guide</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f4f4f4;
+            color: #333;
+        }
+        
+        header {
+            background-color: #333;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        header .logo {
+            height: 50px;
+            margin-right: 20px;
+        }
+        
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            gap: 15px;
+        }
+        
+        nav ul li {
+            display: inline;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        main {
+            padding: 20px;
+        }
+        
+        #businesses-list {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        #business-categories {
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        #business-categories button {
+            padding: 10px 20px;
+            margin: 5px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        
+        #business-categories button:hover {
+            background-color: #0056b3;
+        }
+        
+        #business-details {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+        
+        .business {
+            background: white;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 200px;
+            text-align: center;
+        }
+        
+        .business img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+        
+        .business button {
+            padding: 5px 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        
+        .business button:hover {
+            background-color: #0056b3;
+        }
+        
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: relative;
+            width: 100%;
+            bottom: 0;
+        }
+        
+        .details-box {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            background: white;
+            padding: 10px;
+            border: 1px solid #ccc;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+        
+        .details-box h3 {
+            margin: 0 0 10px;
+        }
+        
+        .details-box p {
+            margin: 0 0 5px;
+        }
+        
+        .details-box button {
+            display: block;
+            margin: 5px 0;
+            padding: 5px 10px;
+            background: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .details-box button:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="images/logo.jpg" alt="App Logo" class="logo">
+        <h1>PlanIt Your Local Guide</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="attractions.html">Attractions</a></li>
+                <li><a href="businesses.html">Businesses</a></li>
+                <li><a href="services.html">Services</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <section id="businesses-list">
+            <h2>Nearby Businesses</h2>
+            <div id="map" style="height: 500px; width: 100%;"></div>
+            <div id="business-categories">
+                <button onclick="showCategory('restaurants')">Restaurants</button>
+                <button onclick="showCategory('shopping')">Shopping</button>
+                <button onclick="showCategory('theaters')">Theaters</button>
+                <button onclick="showCategory('others')">Others</button>
+            </div>
+            <div id="business-details">
+                <!-- Business details will be dynamically inserted here -->
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 PlanIt Your Local Guide</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            let map;
+            let userLat, userLng;
+        
+            if (typeof L === 'undefined') {
+                console.error('Leaflet library is not loaded.');
+                return;
+            }
+        
+            map = L.map('map').setView([12.9716, 79.1587], 15);
+        
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+        
+            const businesses = {
+                restaurants: [
+                    { name: 'Restaurant 1', lat: 12.9716, lon: 79.1587, rating: 4.5, reviews: 120, image: 'images/restaurant1.jpg' },
+                    { name: 'Restaurant 2', lat: 12.9726, lon: 79.1597, rating: 4.0, reviews: 80, image: 'images/restaurant2.jpg' },
+                    { name: 'Restaurant 3', lat: 12.9736, lon: 79.1607, rating: 4.2, reviews: 90, image: 'images/restaurant3.jpg' }
+                ],
+                shopping: [
+                    { name: 'Shopping Mall 1', lat: 12.9746, lon: 79.1617, rating: 4.5, reviews: 150, image: 'images/shopping1.jpg' },
+                    { name: 'Shopping Mall 2', lat: 12.9756, lon: 79.1627, rating: 4.2, reviews: 90, image: 'images/shopping2.jpg' },
+                    { name: 'Shopping Mall 3', lat: 12.9766, lon: 79.1637, rating: 4.8, reviews: 200, image: 'images/shopping3.jpg' }
+                ],
+                theaters: [
+                    { name: 'Theater 1', lat: 12.9776, lon: 79.1647, rating: 4.8, reviews: 200, image: 'images/theater1.jpg' },
+                    { name: 'Theater 2', lat: 12.9786, lon: 79.1657, rating: 4.3, reviews: 110, image: 'images/theater2.jpg' },
+                    { name: 'Theater 3', lat: 12.9796, lon: 79.1667, rating: 4.6, reviews: 130, image: 'images/theater3.jpg' }
+                ],
+                others: [
+                    { name: 'Other Business 1', lat: 12.9806, lon: 79.1677, rating: 4.1, reviews: 70, image: 'images/other1.jpg' },
+                    { name: 'Other Business 2', lat: 12.9816, lon: 79.1687, rating: 4.6, reviews: 130, image: 'images/other2.jpg' },
+                    { name: 'Other Business 3', lat: 12.9826, lon: 79.1697, rating: 4.3, reviews: 90, image: 'images/other3.jpg' }
+                ]
+            };
+        
+            function displayBusinesses(category) {
+                const businessDetails = document.getElementById('business-details');
+                businessDetails.innerHTML = '';
+        
+                businesses[category].forEach(business => {
+                    const businessElement = document.createElement('div');
+                    businessElement.className = 'business';
+                    businessElement.innerHTML = `
+                        <h3>${business.name}</h3>
+                        <img src="${business.image}" alt="${business.name}">
+                        <p>Rating: ${business.rating}</p>
+                        <p>Reviews: ${business.reviews}</p>
+                        <button onclick="showRoute(${business.lat}, ${business.lon})">Show Route</button>
+                    `;
+                    businessDetails.appendChild(businessElement);
+        
+                    const marker = L.marker([business.lat, business.lon]).addTo(map)
+                        .bindPopup(`<b>${business.name}</b><br>Rating: ${business.rating}<br>Reviews: ${business.reviews}`);
+                    
+                    marker.on('click', () => {
+                        showDetails(business);
+                    });
+                });
+            }
+        
+            function showDetails(business) {
+                const existingDetailsBox = document.querySelector('.details-box');
+                if (existingDetailsBox) {
+                    existingDetailsBox.remove();
+                }
+        
+                const detailsBox = document.createElement('div');
+                detailsBox.className = 'details-box';
+                detailsBox.innerHTML = `
+                    <h3>${business.name}</h3>
+                    <p>Rating: ${business.rating}</p>
+                    <p>Reviews: ${business.reviews}</p>
+                    <button onclick="window.location.href='reviews.html?place_name=${business.name}'">Reviews</button>
+                `;
+                document.body.appendChild(detailsBox);
+            }
+        
+            window.showCategory = function(category) {
+                displayBusinesses(category);
+            };
+        
+            window.showRoute = function(lat, lon) {
+                if (!userLat || !userLng) {
+                    alert('User location not available.');
+                    return;
+                }
+        
+                const routeUrl = `https://api.openrouteservice.org/v2/directions/driving-car?api_key=YOUR_OPENROUTESERVICE_API_KEY&start=${userLng},${userLat}&end=${lon},${lat}`;
+        
+                fetch(routeUrl)
+                    .then(response => response.json())
+                    .then(data => {
+                        const coordinates = data.features[0].geometry.coordinates;
+                        const route = coordinates.map(coord => [coord[1], coord[0]]);
+        
+                        const routeLine = L.polyline(route, { color: 'blue' }).addTo(map);
+                        map.fitBounds(routeLine.getBounds());
+                    })
+                    .catch(error => console.error('Error fetching route:', error));
+            };
+        
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition((position) => {
+                    userLat = position.coords.latitude;
+                    userLng = position.coords.longitude;
+        
+                    map.setView([userLat, userLng], 15);
+        
+                    L.marker([userLat, userLng]).addTo(map)
+                        .bindPopup('You are here').openPopup();
+                }, (error) => {
+                    console.error('Error getting user location:', error);
+                });
+            } else {
+                console.error('Geolocation is not supported by this browser.');
+            }
+        });
+    </script>
+</body>
+</html>

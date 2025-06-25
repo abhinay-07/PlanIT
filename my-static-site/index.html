@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PlanIt Your Local Guide</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <img src="images/logo.jpg" alt="App Logo" class="logo">
+            <h1>PlanIt Your Local Guide</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="attractions.html">Attractions</a></li>
+                <li><a href="businesses.html">Businesses</a></li>
+                <li><a href="reviews.html">Reviews</a></li>
+                <li><a href="services.html">Services</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <section id="filters">
+        <input type="text" id="search" placeholder="Search for places...">
+        <label for="rating">Filter by Rating:</label>
+        <select id="rating">
+            <option value="all">All</option>
+            <option value="4">4 stars & up</option>
+            <option value="3">3 stars & up</option>
+            <option value="2">2 stars & up</option>
+            <option value="1">1 star & up</option>
+        </select>
+        
+        <label for="reviews">Filter by Reviews:</label>
+        <select id="reviews">
+            <option value="all">All</option>
+            <option value="100">100 & up</option>
+            <option value="50">50 & up</option>
+            <option value="10">10 & up</option>
+        </select>
+    </section>
+    
+    <section id="banner-top-picks">
+        <div class="banner-content">
+            <h2>Welcome to PlanIt Your Local Guide</h2>
+            <p>Discover the best places around VIT University</p>
+        </div>
+        <div id="top-picks">
+            <h2>Top Picks of the Week</h2>
+            <div class="top-picks-container">
+                <div class="top-pick">
+                    <img src="images/pick1.jpg" alt="Top Pick 1">
+                    <h3>Top Pick 1</h3>
+                    <p>Description of Top Pick 1</p>
+                </div>
+                <div class="top-pick">
+                    <img src="images/pick2.jpg" alt="Top Pick 2">
+                    <h3>Top Pick 2</h3>
+                    <p>Description of Top Pick 2</p>
+                </div>
+                <div class="top-pick">
+                    <img src="images/pick3.jpg" alt="Top Pick 3">
+                    <h3>Top Pick 3</h3>
+                    <p>Description of Top Pick 3</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div id="map-container">
+        <div id="map" style="height: 200px; width: 300px;"></div>
+        <button id="zoom-map">Zoom Map</button>
+    
+    
+    <div id="ai-assistant-container">
+        <button id="open-ai-assistant">Chat with AI Assistant</button>
+        <div id="chat-container" style="display: none;">
+            <div id="chat-box">
+                <div id="chat-messages"></div>
+                <input type="text" id="chat-input" placeholder="Type a message...">
+                <button id="send-chat">Send</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
