@@ -1,43 +1,51 @@
-# 🧭 PlanIt
+# 🌍 Plan It – Your Local Guide
 
-**A web-based guide to help the VIT University community discover and explore local attractions, businesses, and services with authentic peer reviews and personalized trip planning.**
+> A smart, web-based **trip planning and local discovery platform** designed for **VIT-AP University students** and the local community.  
+It helps users **discover attractions, services, restaurants, and events**, while offering **verified reviews, trip cost estimation, vehicle rentals, and trending picks**.
 
-## 🌐 Overview
+---
 
-PlanIt is a responsive, community-driven web platform tailored for students, locals, and visitors around VIT University. From salons and shops to cultural hotspots and weekend getaways, the platform brings everything together with genuine reviews, smart filters, and trip estimators.
+## 🚀 Features
 
-## ✨ Key Features
+✅ **Login & Authentication**  
+- Separate login for **VIT-AP students** (via university email) and **public users** (via Google).  
+- Verified student reviews to avoid fake ratings.  
 
-- 📍 **Categorized Listings** – Explore shops, restaurants, tourist spots, and more.
-- 🗺️ **Map Integration** – Navigate easily with live location links and directions.
-- 💬 **Peer-Verified Reviews** – Only genuine feedback from VIT students and locals.
-- 💸 **Trip Cost Estimator** – Plan your budget with dynamic pricing insights.
-- 🔔 **Event Notifications** – Stay informed about local festivals and offers.
-- 🔍 **Smart Search & Filters** – Find exactly what you need, quickly and easily.
-- 🛡️ **Secure & Scalable** – Built with HTTPS, JWT, and industry best practices.
+✅ **Attractions & Services Guide**  
+- Categorized listings of businesses, restaurants, services, and tourist spots.  
+- Reviews and ratings (general + student-only).  
 
-## 👨‍💻 Tech Stack
+✅ **Trip Planning & Estimation**  
+- Plan trips by selecting **days and group size**.  
+- Suggests places, calculates **distance, cost, and navigation routes**.  
+- Auto-suggests **vehicle type** (bike, car, van).  
 
-- **Frontend**: HTML, Tailwind CSS , React JS
-- **Backend**: Node JS
-- **Database**: MongoDB
-- **APIs**: Google Maps, Social Media APIs
-- **Web Server**: Apache
-- **Security**: HTTPS, SQL Injection
+✅ **Vehicle Rentals**  
+- Vehicle owners can **register their vehicles** for rent.  
+- Admin verification for authenticity.  
+- Direct booking with owners.  
 
-## 👥 User Roles
+✅ **Offers & Discounts**  
+- Live updates on discounts from restaurants, malls, shops, and services.  
 
-- **Students / Locals / Tourists** – Discover, review, and plan your activities.
-- **Administrators** – Manage listings, moderate reviews, and verify content.
+✅ **Trending Picks**  
+- Weekly **Top 5 places visited by VIT-AP students**.  
 
-## 🚀 Getting Started
+✅ **Map Integration**  
+- Integrated with **Google Maps API** for routes and navigation.  
 
-1. Clone the repo:
-   ```bash
-   git clone https://github.com/abhinay-07/planit.git
+---
 
-2. Set up your development environment.
-3. Configure your .env file with database and API keys.
-4. Run the project in your preferred server environment.
+## 🛠 Tech Stack
 
+- **Frontend**: React.js, Tailwind CSS  
+- **Backend**: Node.js / Express.js (or PHP if chosen)  
+- **Database**: MySQL / MongoDB  
+- **Authentication**: Google OAuth + University Email Domain Check  
+- **APIs**: Google Maps API, Social Media APIs  
+- **Deployment**: Docker + Cloud (AWS / Vercel / Netlify)
+
+---
+
+## 📂 Project Structure (Example)
 
