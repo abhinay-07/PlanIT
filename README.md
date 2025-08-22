@@ -1,4 +1,4 @@
-# 🌍 Plan It – Your Local Guide
+#  Plan It – Your Local Guide
 
 > A smart, web-based **trip planning and local discovery platform** designed for **VIT-AP University students** and the local community.  
 It helps users **discover attractions, services, restaurants, and events**, while offering **verified reviews, trip cost estimation, vehicle rentals, and trending picks**.
