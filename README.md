@@ -49,12 +49,7 @@ It helps users **discover attractions, services, restaurants, and events**, whil
 
 ## 📂 Project Structure (Example)
 
-Plan-It/
-│── frontend/ # React frontend
-│── backend/ # Express backend
-│── database/ # DB schemas
-│── docs/ # Documentation (SRS, reports, PPTs)
-│── README.md
+<img width="414" height="171" alt="image" src="https://github.com/user-attachments/assets/7e0f920f-a2a8-4987-86cc-9c4798ddb7f1" />
 
 
 ---
