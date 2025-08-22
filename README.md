@@ -49,3 +49,42 @@ It helps users **discover attractions, services, restaurants, and events**, whil
 
 ## 📂 Project Structure (Example)
 
+Plan-It/
+│── frontend/ # React frontend
+│── backend/ # Express backend
+│── database/ # DB schemas
+│── docs/ # Documentation (SRS, reports, PPTs)
+│── README.md
+
+
+---
+
+## ⚙️ Installation & Setup
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/your-username/plan-it.git
+   cd plan-it
+---
+
+2.Setup frontend:
+
+  cd frontend
+  npm install
+  npm start
+
+
+3.Setup backend:
+
+  cd backend
+  npm install
+  npm run dev
+
+
+4.Configure .env files for:
+
+  Database connection
+
+  Google Maps API key
+
+  OAuth credentials
